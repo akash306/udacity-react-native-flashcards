@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Dimensions, View, Text, StatusBar, ToolbarAndroid, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { Dimensions, View, Button, Text, StatusBar, ToolbarAndroid, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
 import {getDecks} from '../utils/api'
 import { loadDecks } from '../actions/index'
-import Deck from './Deck'
 import DeckList from './DeckList';
 
 const decks = null
@@ -16,24 +15,23 @@ class Index extends Component {
     const { loadDecks } = this.props
     getDecks().then(decks => loadDecks(decks))
   }
+  onPress() {
+    console.log('Pressed')
+  }
 
   render() {
     const { decks } = this.props
     const Decks = Object.values(decks)
     return (
       <View style={styles.mainContainer}>
-        <ToolbarAndroid 
-          title='Home'
-          style={styles.toolbar}
-          titleColor='white' />
         <DeckList />
-        <TouchableOpacity activeOpacity={0.5} onPress={this.SampleFunction} style={styles.TouchableOpacityStyle} >
-
-          <Image source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}
-
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('NewDeck')} style={styles.TouchableOpacityStyle}>
+          <Image
+            source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}
             style={styles.FloatingButtonStyle} />
-
         </TouchableOpacity>
+        
+        
       </View>
     )
   }
@@ -41,7 +39,7 @@ class Index extends Component {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    height: deviceHeight,
+    height: deviceHeight - 100,
     width: deviceWidth
   },
 
@@ -59,8 +57,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 50,
     height: 50,
-    right: 30,
-    bottom: 30
+    right: 20,
+    bottom: 20
   },
 
   FloatingButtonStyle: {

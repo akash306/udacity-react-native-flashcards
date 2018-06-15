@@ -4,19 +4,19 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import reducer from './src/reducers'
+import {MainNavigator} from './Routes'
 import Index from './src/components/Index'
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View >
-          <Index />
-        </View>
+          <MainNavigator />
       </Provider>
     )
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
