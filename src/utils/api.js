@@ -1,64 +1,67 @@
+import React from 'react';
 import { AsyncStorage } from 'react-native'
 
- const initialData = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer:
-          'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
+const DECKS_STORAGE_KEY = 'santhosh.decks'
+
+function dummyDecks() {
+  return {
+    React: {
+      title: 'React',
+      questions: [
+        {
+          question: 'What is React?',
+          answer: 'A library for managing user interfaces'
+        }, {
+          question: 'Where do you make Ajax requests in React?',
+          answer: 'The componentDidMount lifecycle event'
+        }
+      ]
+    },
+    JavaScript: {
+      title: 'JavaScript',
+      questions: [
+        {
+          question: 'What is a closure?',
+          answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        }
+      ]
+    }
   }
 }
 
-const KEY = '@UdaciCards:Data'
+function parseDecks(results) {
+  return (results) ? JSON.parse(results) : dummyDecks()
+}
 
 export function getDecks() {
-  AsyncStorage.getItem(KEY).then(data => {
-    if (!data) {
-      AsyncStorage.setItem(KEY, JSON.stringify(initialData))
-      return initialData
-    }
-    else {
-      return JSON.parse(data)
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(parseDecks)
+}
+
+export function getDeck(id) {
+  return getDecks().then((decks) => (decks[id]))
+}
+
+export function saveDeckTitle(deckTitle) {
+  getDecks().then((decks) => {
+    if (!decks[deckTitle]) {
+      decks[deckTitle] = {
+        title: deckTitle,
+        questions: []
+      }
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
     }
   })
 }
 
-export function getDeck(id) {
-  AsyncStorage.getItem(KEY).then(data => data[id])
+export function clearDB() {
+  AsyncStorage.setItem(DECKS_STORAGE_KEY, '')
 }
 
-export function saveDeckTitle(title) {
-  const data = AsyncStorage.getItem(KEY)
-  if (data[title]) {
-    data[title] = {
-      title,
-      question: []
+export function addCardToDeck(deckTitle, { question, answer }) {
+  getDecks().then((decks) => {
+    if (decks[deckTitle] && decks[deckTitle]['questions']) {
+      decks[deckTitle]['questions'].push({ question, answer })
     }
-    AsyncStorage.setItem(KEY, JSON.stringify(data))
-  }
-}
-
-export function addCardToDeck(title, question) {
-  const data = AsyncStorage.getItem(KEY)
-  if (data[title]) {
-    data[title]['questions'].push(question)
-    AsyncStorage.setItem(KEY, JSON.stringify(data))
-  }
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
+  })
 }
