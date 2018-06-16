@@ -24,7 +24,7 @@ class Index extends Component {
     const Decks = Object.values(decks)
     return (
       <View style={styles.mainContainer}>
-        <DeckList />
+        <DeckList navigation={this.props.navigation}/>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('NewDeck')} style={styles.TouchableOpacityStyle}>
           <Image
             source={{ uri: 'https://reactnativecode.com/wp-content/uploads/2017/11/Floating_Button.png' }}

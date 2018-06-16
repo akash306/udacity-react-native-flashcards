@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation'
 
 import Index from './src/components/Index'
 import NewDeck from './src/components/NewDeck'
-
+import DeckInfo from './src/components/DeckInfo'
 
 export const MainNavigator = createStackNavigator({
   Home: { 
@@ -26,7 +26,19 @@ export const MainNavigator = createStackNavigator({
         backgroundColor: 'blue'
       }
     })
-  }
+  },
+
+  DeckInfo: {
+    screen: DeckInfo,
+    navigationOptions: () => ({
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'blue'
+      }
+    })
+  },
+
+
 })
 
 // export default MainNavigator

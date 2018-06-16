@@ -15,7 +15,8 @@ const DeckList = (props) => {
     <ScrollView>
       <View>
         {Decks.map(deck => {
-          return <Deck key={deck.title} deck={deck}></Deck>
+          return <Deck key={deck.title} deck={deck} navigation={props.navigation
+          }></Deck>
         })}
       </View>
     </ScrollView>
