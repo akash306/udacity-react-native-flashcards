@@ -1,7 +1,7 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native'
 
-const DECKS_STORAGE_KEY = 'Deck:Data'
+const DECKS_STORAGE_KEY = 'Decks:Data'
 
 function dummyDecks() {
   return {

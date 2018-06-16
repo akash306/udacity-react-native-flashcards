@@ -22,7 +22,7 @@ class DeckInfo extends Component {
           <TouchableOpacity style={styles.btn1Style} onPress={() => this.props.navigation.navigate('NewCard', {deckTitle: deckTitle})}>
             <Text style={{fontSize: 25}}>Add Card</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn2Style} onPress={() => this.props.navigation.navigate('Quiz')}>
+          <TouchableOpacity style={styles.btn2Style} onPress={() => this.props.navigation.navigate('Quiz',{deckTitle: deckTitle})}>
             <Text style={styles.textStyle}>Start Quiz</Text>
           </TouchableOpacity>
         </View>
