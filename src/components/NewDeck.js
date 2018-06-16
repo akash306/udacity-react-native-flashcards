@@ -14,9 +14,8 @@ class NewDeck extends Component {
     if(title) {
       saveDeckTitle(title)
       this.setState({deckTitle: ''})
-      this.props.addDeck(title)
-      this.props.navitation.navigate('Home')
-      
+      this.props.dispatch(addDeck(title))
+      this.props.navigation.goBack()
     }
   }
 
@@ -28,7 +27,6 @@ class NewDeck extends Component {
           style={styles.deck}
           onChangeText={(title) => this.setState({deckTitle: title})}
         />
-        <Text>{this.state.deckTitle}</Text>
         <Button title='Submit' onPress={() => this.addDeckToData(this.state.deckTitle)} />
       </View>
     )
@@ -50,8 +48,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  addDeck: (newDeck) => dispatch(addDeck(newDeck))
-})
+const mapDispatchToProps = (dispatch) => {
+  return dispatch
+}
 
-export default connect()(NewDeck)
+export default connect(mapDispatchToProps)(NewDeck)

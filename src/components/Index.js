@@ -39,8 +39,9 @@ class Index extends Component {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    height: deviceHeight - 100,
-    width: deviceWidth
+    height: deviceHeight - 80,
+    width: deviceWidth,
+    backgroundColor: '#FFF'
   },
 
   toolbar: {

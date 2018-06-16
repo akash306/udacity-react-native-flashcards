@@ -1,7 +1,7 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native'
 
-const DECKS_STORAGE_KEY = 'santhosh.decks'
+const DECKS_STORAGE_KEY = 'Deck:Data'
 
 function dummyDecks() {
   return {
@@ -38,7 +38,10 @@ export function getDecks() {
 }
 
 export function getDeck(id) {
-  return getDecks().then((decks) => (decks[id]))
+  return getDecks().then((decks) => {
+    // console.log(decks[id])
+    return decks[id]
+  })
 }
 
 export function saveDeckTitle(deckTitle) {
