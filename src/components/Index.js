@@ -6,6 +6,7 @@ import {getDecks} from '../utils/api'
 import { loadDecks } from '../actions/index'
 import DeckList from './DeckList';
 
+
 const decks = null
 var deviceHeight = Dimensions.get('window').height
 var deviceWidth = Dimensions.get('window').width

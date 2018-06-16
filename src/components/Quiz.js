@@ -55,17 +55,24 @@ class Quiz extends Component {
       )
     }
     else {
-      return <View style={styles.container}>
+      return ( 
+        <View style={styles.container}>
           <Text style={{ fontSize: 25, textAlign: 'center' }}>
             {this.state.correctAnswer} out of {cards.length} are correct
           </Text>
-          <TouchableOpacity style={[styles.btnStyle, { backgroundColor: 'blue', marginBottom: 60 }]} onPress={()=> this.props.navigation.goBack()}>
+          <TouchableOpacity style={[styles.btnStyle, { backgroundColor: 'blue'}]} onPress={()=> this.props.navigation.goBack()}>
             <Text style={{ fontSize: 25, color: 'white' }}>
               Try Again
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity style={[styles.btnStyle, { backgroundColor: 'blue', marginBottom: 60 }]} onPress={() => this.props.navigation.navigate('Home')}>
+            <Text style={{ fontSize: 25, color: 'white' }}>
+              Back to Deck
+            </Text>
+          </TouchableOpacity>
         </View>
-    }
+      )
+    } 
   }
 }
 
