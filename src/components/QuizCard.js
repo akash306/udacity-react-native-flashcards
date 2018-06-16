@@ -1,35 +1,41 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
-const QuizCard = props => {
-  return (
-    <View>
-      <Text style={{ padding: 5, fontSize: 15 }}>
-        {props.count}/{props.totalCount}
-      </Text>
+class QuizCard extends Component {
+  state = {
+    flag: true
+  }
+  refreshFlag() {
+    this.setState({flag: 0})
+  }
+  render() {
+    const {card} = this.props
+    let question = ''
+    let option = ''
+    if(this.state.flag) {
+      question = card["question"]
+      option = 'Answer'
+    }
+    else {
+      question = card['answer']
+      option = 'Question'
+    }
+    return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 60, textAlign: 'center' }}>{props.title}</Text>
-        <Text 
-          style={{ color: 'red', marginTop: 30 }}
-          onPress={() => console.log('Pressed')}>
-          {props.option}
+        <Text style={{ padding: 5, fontSize: 15, textAlign:'left' }}>
+          {this.props.count}/{this.props.totalCount}
         </Text>
+        <Text style={{ fontSize: 30, textAlign: 'center' }}>{question}</Text>
         <TouchableOpacity
-          style={[
-            styles.btnStyle,
-            { backgroundColor: 'green', marginTop: 100 }
-          ]}
-          onPress={() => console.log('Button Clicked')}>
-          <Text style={{ fontSize: 25, color: 'white' }}>Correct</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.btnStyle, { backgroundColor: 'red' }]}
-          onPress={() => console.log('Button Clicked')}>
-          <Text style={{ fontSize: 25, color: 'white' }}>Incorrect</Text>
+          onPress={() => this.setState(previousState => {
+            return {flag: !previousState.flag}
+          })}
+        >
+          <Text style={{ color: 'red', marginTop: 30 }}>{option}</Text>
         </TouchableOpacity>
       </View>
-    </View>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -37,18 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  btnStyle: {
-    width: 300,
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    margin: 2,
-    borderWidth: 1,
-    backgroundColor: 'blue'
+    marginTop: 60
   }
 })
 
