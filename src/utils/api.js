@@ -30,12 +30,16 @@ function dummyDecks() {
   }
 }
 
-function parseDecks(results) {
-  return (results) ? JSON.parse(results) : dummyDecks()
-}
-
 export function getDecks() {
-  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(parseDecks)
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then((results) => {
+      if (results === null) {
+        return dummyDecks()
+      }
+      else {
+        return JSON.parse(results)
+      }
+    })
 }
 
 export function getDeck(id) {
@@ -55,10 +59,6 @@ export function saveDeckTitle(deckTitle) {
       AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
     }
   })
-}
-
-export function clearDB() {
-  AsyncStorage.setItem(DECKS_STORAGE_KEY, '')
 }
 
 export function addCardToDeck(deckTitle, { question, answer }) {
@@ -89,31 +89,6 @@ function createNotification() {
     }
   }
 }
-
-// export function setLocalNotification() {
-//   AsyncStorage.getItem(DECK_CARDS_NOTIFICATION)
-//     .then(JSON.parse)
-//     .then(data => {
-//       if (data === null) {
-//         Permissions.askAsync(Permissions.NOTIFICATIONS)
-//           .then(({ status }) => {
-//             if (status === 'granted') {
-//               Notification.cancelAllScheduledNotificationsAsync()
-//               let tomorrow = new Date() 
-//               tomorrow.setDate(tomorrow.getDate() + 1)
-
-//               Notification.scheduleLocalNotificationAsync(
-//                 createNotification(), {
-//                   time: tomorrow,
-//                   repeat: 'day'
-//                 }
-//               )
-//               AsyncStorage.setItem(DECK_CARDS_NOTIFICATION, JSON.stringify(true))
-//             }
-//           })
-//       }
-//     })
-// }
 
 export function setLocalNotification() {
   AsyncStorage.getItem(DECK_CARDS_NOTIFICATION)
