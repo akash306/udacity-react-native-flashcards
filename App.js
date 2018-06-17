@@ -1,13 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import reducer from './src/reducers'
 import {MainNavigator} from './Routes'
-import Index from './src/components/Index'
+import { setLocalNotification } from './src/utils/api'
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>
