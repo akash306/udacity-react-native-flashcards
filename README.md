@@ -1,26 +1,9 @@
-# UdaciCards
-This project is developed for Udacity React Nanodegree (React Native) project submission.
+UdaciCards
+React Nanodegree react native project. A mobile app that allows the user to create an infinite amount of Decks which each contain an infinate amount of flash cards consisting of a Question, an Answer, and buttons for the user to say if they got the question right or wrong. At the end of the quiz, the user is told how many questions they got right. The app also prints a notification on the home screen if the user hasn't taken a quiz ever or in 24 hours.
 
-The basic idea of the project is to create bunch of decks each with few cards. Each card will contain question and answer. the users can later come back and test themselves and evaluate themselves by checking if the answer is right.
-
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
-
-## How To Install And Run The App
-
-1. Clone/Download this repo and then do `yarn install` in the root of this project from the command terminal
-  do `yarn start`
-2. you should see a barcode with bunch of options, type `i` for iphone simulator ( Tested only in iOS simulator)
-
-You are all set, this app is now running in your iOS simulator.
-
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
-
-## mobile-flashcards
-
-This project is developed for Udacity React Nanodegree (React Native) project submission.
-
-The basic idea of the project is to create bunch of decks each with few cards. Each card will contain question and answer. the users can later come back and test themself and evaluate themselves by checking if the answer is right.
-
-## Important Note
-
-This app works correctly in Android. It was tested in Android platform.
+Installation
+git clone git@github.com:akashdeepsamantra/udacity-react-native-flashcards.git
+cd UdaciCards
+npm install
+npm start
+NOTE: the app was only developed in android.

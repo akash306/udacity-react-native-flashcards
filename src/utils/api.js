@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { Notification, Permissions } from 'expo'
+import { Notifications, Permissions } from 'expo'
 
 const DECKS_STORAGE_KEY = 'Decks:Data'
 const DECK_CARDS_NOTIFICATION = 'Quiz:Notification'
